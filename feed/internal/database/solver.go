@@ -1,9 +1,9 @@
 package database
 
 import (
-	"gorm.io/driver/mysql"
+	"time"
+
 	"gorm.io/gorm"
-	"fmt"
 )
 
 type User struct {
@@ -21,16 +21,26 @@ type User struct {
 }
 
 type Video struct {
-	Id            int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                            // 视频唯一标识
-	Author        *User  `protobuf:"bytes,2,opt,name=author,proto3" json:"author,omitempty"`                                     // 视频作者信息
-	PlayUrl       string `protobuf:"bytes,3,opt,name=play_url,json=playUrl,proto3" json:"play_url,omitempty"`                    // 视频播放地址
-	CoverUrl      string `protobuf:"bytes,4,opt,name=cover_url,json=coverUrl,proto3" json:"cover_url,omitempty"`                 // 视频封面地址
-	FavoriteCount int64  `protobuf:"varint,5,opt,name=favorite_count,json=favoriteCount,proto3" json:"favorite_count,omitempty"` // 视频的点赞总数
-	CommentCount  int64  `protobuf:"varint,6,opt,name=comment_count,json=commentCount,proto3" json:"comment_count,omitempty"`    // 视频的评论总数
-	IsFavorite    bool   `protobuf:"varint,7,opt,name=is_favorite,json=isFavorite,proto3" json:"is_favorite,omitempty"`          // true-已点赞，false-未点赞
-	Title         string `protobuf:"bytes,8,opt,name=title,proto3" json:"title,omitempty"`                                       // 视频标题
+	PlayUrl       string `gorm:"column:play_url; type:"varchar(200)"`
+	CoverUrl      string `gorm:"column:cover_url; type:"varchar(200)"`
+	AuthorID      string `gorm:"column:author_id; type:"varchar(200)"`
+	Id            int64  `gorm:"column:id; type:"bigint"`
+	Title         string `gorm:"column:title; type:"varchar(200)"`
+	FavoriteCount int64  `gorm:"column:favorite_count; type:"bigint"`
+	CommentCount  int64  `gorm:"column:comment_count; type:"bigint"`
+	IsFavorite    bool   `gorm:"column:is_favorite; type:"tinyint"`
 }
 
 type Solver struct {
+	handle *gorm.DB // 需要处理的数据库
+}
 
+func (s *Solver) NewSolve(db *gorm.DB) {
+	s.handle = db
+}
+
+func (s *Solver) QueryVideosListByLatestTime(n int, time time.Time) (videosList []*Video) {
+	db := s.handle.Table("video_table")
+	db.Where("created_at < ", time).Limit(n).Find(&videosList)
+	return
 }
