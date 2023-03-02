@@ -1,11 +1,11 @@
-package database
+package api
 
 import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
-func init() {
+func InitialDataBase() *gorm.DB {
 	// 连接 MySQL 数据库
 	dsn := "root:root@tcp(127.0.0.1:3306)/tiktok?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
@@ -29,4 +29,5 @@ func init() {
 	if err := db.Migrator().RenameTable("videos", "videos_table"); err != nil {
 		panic("failed to rename table")
 	}
+	return db
 }
