@@ -21,14 +21,14 @@ type User struct {
 }
 
 type Video struct {
-	PlayUrl       string `gorm:"column:play_url; type:"varchar(200)"`
-	CoverUrl      string `gorm:"column:cover_url; type:"varchar(200)"`
-	AuthorID      string `gorm:"column:author_id; type:"varchar(200)"`
-	Id            int64  `gorm:"column:id; type:"bigint"`
-	Title         string `gorm:"column:title; type:"varchar(200)"`
-	FavoriteCount int64  `gorm:"column:favorite_count; type:"bigint"`
-	CommentCount  int64  `gorm:"column:comment_count; type:"bigint"`
-	IsFavorite    bool   `gorm:"column:is_favorite; type:"tinyint"`
+	PlayUrl       string `gorm:"column:play_url"  type:"varchar(200)"`
+	CoverUrl      string `gorm:"column:cover_url" type:"varchar(200)"`
+	AuthorID      string `gorm:"column:author_id" type:"varchar(200)"`
+	Id            int64  `gorm:"column:id" type:"bigint"`
+	Title         string `gorm:"column:title" type:"varchar(200)"`
+	FavoriteCount int64  `gorm:"column:favorite_count" type:"bigint"`
+	CommentCount  int64  `gorm:"column:comment_count" type:"bigint"`
+	IsFavorite    bool   `gorm:"column:is_favorite" type:"tinyint"`
 }
 
 type Solver struct {
