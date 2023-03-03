@@ -1,15 +1,7 @@
 package main
 
-import (
-	"github.com/RaymondCode/simple-demo/service"
-	"github.com/gin-gonic/gin"
-	"net/http"
-	"time"
-)
+import "fmt"
 
 func main() {
-	go service.RunMessageServer()
-
-	r := setupRouter()
-	r.Run(":8080")
+	fmt.Println("cao")
 }

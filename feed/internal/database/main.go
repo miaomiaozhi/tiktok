@@ -10,7 +10,8 @@ import (
 
 func main() {
 	// db := api.InitialDataBase() // initialize database 只需要一次
-	dsn := "root:root@tcp(101.33.249.244:3306)/tiktok?charset=utf8mb4&parseTime=True&loc=Local"
+	// database 在本地，因此使用本地ip，
+	dsn := "root:root@tcp(127.0.0.1:3306)/tiktok?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Println(err)
