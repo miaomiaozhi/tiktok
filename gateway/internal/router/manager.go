@@ -29,7 +29,7 @@ func (m *Manager) Run() error {
 	return nil
 }
 
-// 
+// 装载全部组件
 func (m *Manager) load() (err error) {
 	err = m.loadPlugin()
 	if err != nil {
@@ -74,6 +74,7 @@ func (m *Manager) loadCORS() error {
 	return nil
 }
 
+// 使用反射装载
 func (m *Manager) loadRoute() error {
 	t := reflect.TypeOf(m)
 	for i := 0; i < t.NumMethod(); i++ {
