@@ -25,7 +25,7 @@ func (m *Manager) Run() error {
 	if err != nil {
 		return err
 	}
-	// 
+	m.handle.Run()	// defalut ip:port localhost:8080
 	return nil
 }
 
@@ -79,13 +79,12 @@ func (m *Manager) loadRoute() error {
 	for i := 0; i < t.NumMethod(); i++ {
 		f := t.Method(i)
 		if strings.HasPrefix(f.Name, "Route") &&
-			f.Type.NumOut() == 0 &&
-			f.Type.NumIn() == 1 {
-			log.Println("[GATEWAY] LOAD ROUTE:", f.Name)
-			f.Func.Call([]reflect.Value{
-				reflect.ValueOf(m),
-			})
-		}
+			f.Type.NumOut() == 0 && f.Type.NumIn() == 1 {
+				log.Println("[GATEWAY] LOAD ROUTE:", f.Name)
+				f.Func.Call([]reflect.Value{
+					reflect.ValueOf(m),
+				})
+			}
 	}
 	return nil
 }
