@@ -77,7 +77,7 @@ func (m *Manager) feed(c *gin.Context) {
 	// }
 	// fmt.Printf("Feed: %v", response)
 
-	conn := consul.ResigterGRPCServer()
+	conn := consul.RegisterGRPCServer()
 	token := c.Query("token")
 
 	client := service.NewFeedClient(conn)

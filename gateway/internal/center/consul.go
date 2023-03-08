@@ -1,7 +1,6 @@
 package center
 
 import (
-	"context"
 	"log"
 
 	"google.golang.org/grpc"
@@ -9,21 +8,18 @@ import (
 )
 
 const (
-	address = "101.33.249.244:8899"	// gRPC Feed 流 ip:port
+	address = "101.33.249.244:8899" // gRPC Feed 流 ip:port
 )
 
-func ResigterGRPCServer() *grpc.ClientConn {
+func RegisterGRPCServer() *grpc.ClientConn {
 	// 注册 gRPC 服务
-	conn, err := grpc.DialContext(
-		context.Background(),
+	conn, err := grpc.Dial(
 		address,
-		grpc.WithBlock(),
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	if err != nil {
-		log.Fatalf("Failed to connect : %v", err)
+		log.Fatalf("Register gRPC server error: %v", err)
 		return nil
 	}
-	defer conn.Close()
 	return conn
 }

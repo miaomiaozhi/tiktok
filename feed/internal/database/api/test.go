@@ -1,11 +1,13 @@
 package api
 
 import (
+	"feed/internal/service"
+
 	"gorm.io/gorm"
 )
 
 func create(db *gorm.DB) error {
-	video := Video{
+	video := service.FeedVideo{
 		PlayUrl:  "Test",
 		CoverUrl: "Test",
 	}
@@ -13,12 +15,12 @@ func create(db *gorm.DB) error {
 	return nil
 }
 func retrieve(db *gorm.DB) error {
-	var videosList []*Video
+	var videosList []*service.FeedVideo
 	db.Find(&videosList)
 	return nil
 }
 func update(db *gorm.DB) error {
-	testVideo := Video{
+	testVideo := service.FeedVideo{
 		PlayUrl:  "Test",
 		CoverUrl: "Test",
 	}
@@ -26,7 +28,7 @@ func update(db *gorm.DB) error {
 	return nil
 }
 func delete(db *gorm.DB) error {
-	testVideo := Video{
+	testVideo := service.FeedVideo{
 		PlayUrl:  "Test",
 		CoverUrl: "Test",
 	}

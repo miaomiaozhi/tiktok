@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Feed_FeedVideo_FullMethodName = "/service.Feed/feedVideo"
+	Feed_FeedVideo_FullMethodName = "/service.Feed/FeedVideo"
 )
 
 // FeedClient is the client API for Feed service.
@@ -100,7 +100,7 @@ var Feed_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*FeedServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "feedVideo",
+			MethodName: "FeedVideo",
 			Handler:    _Feed_FeedVideo_Handler,
 		},
 	},

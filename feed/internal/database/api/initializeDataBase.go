@@ -1,6 +1,8 @@
 package api
 
 import (
+	"feed/internal/service"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -13,12 +15,12 @@ func InitialDataBase() *gorm.DB {
 		panic("failed to connect database")
 	}
 	// 自动迁移 User 结构体对应的表
-	err = db.AutoMigrate(&User{})
+	err = db.AutoMigrate(&service.FeedUser{})
 	if err != nil {
 		panic("failed to migrate table")
 	}
 	// 自动迁移 Video 结构体对应的表
-	err = db.AutoMigrate(&Video{})
+	err = db.AutoMigrate(&service.FeedUser{})
 	if err != nil {
 		panic("failed to migrate table")
 	}
